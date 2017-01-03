@@ -17,6 +17,8 @@ This is still highly a WIP. More documentation on the way.
 
 ## Usage
 
+
+
 ```
-s2i build /path/to/test-app lawliet89/rust-s2i:1.14.0 test-app --runtime-image lawliet89/rust-s2i:runtime
+s2i build /path/to/test-app lawliet89/rust-s2i:1.14.0 test-app --runtime-image lawliet89/rust-s2i:runtime -e RUST_BINARY="my_app"
 ```
