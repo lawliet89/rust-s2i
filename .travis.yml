@@ -11,7 +11,7 @@ env:
   - IMAGE_NAME=rust-s2i S2I_BINARY="https://github.com/openshift/source-to-image/releases/download/v1.1.3/source-to-image-v1.1.3-ddb10f1-darwin-amd64.tar.gz"
 
 install:
-  - "curl \"${S2I_BINARY}\" > s2i.tar.gz"
+  - "curl -L \"${S2I_BINARY}\" > s2i.tar.gz"
   - tar -xvf s2i.tar.gz
   - cp s2i /usr/local/bin
   - rm -rf *
