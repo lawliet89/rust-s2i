@@ -10,3 +10,4 @@
 # tar cf - <list of files and folders>
 
 CARGO_CACHE=${CARGO_HOME:-$HOME/.cargo}
+TARGET_DIR="target"

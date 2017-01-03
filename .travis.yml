@@ -1,3 +1,5 @@
+sudo: required
+
 services:
   - docker
 
@@ -11,7 +13,7 @@ env:
 install:
   - "curl -L \"${S2I_BINARY}\" > s2i.tar.gz"
   - tar -xvf s2i.tar.gz
-  - cp s2i /usr/local/bin
+  - sudo cp s2i /usr/local/bin
   - rm -rf *
 
 script:
