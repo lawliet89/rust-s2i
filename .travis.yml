@@ -12,9 +12,9 @@ env:
 
 install:
   - "curl \"${S2I_BINARY}\" > s2i.tar.gz"
-  - tar -xvf release.tar.gz ./s2i
+  - tar -xvf s2i.tar.gz ./s2i
   - cp s2i/s2i /usr/local/bin
-  - rm -rf s2i release.tar.gz
+  - rm -rf s2i s2i.tar.gz
 
 script:
   - docker build -t "${IMAGE_NAME}" .
