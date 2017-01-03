@@ -1,2 +1,3 @@
 #!/bin/bash -e
-echo "Nothing to do"
+
+echo "Nothing to assemble" > /dev/null
