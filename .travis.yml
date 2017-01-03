@@ -17,5 +17,5 @@ install:
   - popd
 
 script:
-  - docker build -t "${rust-s2i}" .
+  - docker build -t "${IMAGE_NAME}" .
   - test/run
