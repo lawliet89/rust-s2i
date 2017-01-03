@@ -1,0 +1,21 @@
+sudo: required
+
+services:
+  - docker
+
+language: go
+
+go: 1.6
+
+env:
+  - IMAGE_NAME=rust-s2i
+
+install:
+  - go get github.com/openshift/source-to-image
+  - pushd ${GOPATH}/src/github.com/openshift/source-to-image
+  - export PATH=$PATH:${GOPATH}/src/github.com/openshift/source-to-image/_output/local/bin/linux/amd64/
+  - popd
+
+script:
+  - docker build -t "${rust-s2i}" .
+  - test/run
