@@ -10,4 +10,4 @@ set -eu
 
 RUST_BINARY="${RUST_BINARY:-test-app}"
 
-exec "release${RUST_BINARY}"
+exec "release/${RUST_BINARY}"
