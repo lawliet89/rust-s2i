@@ -6,7 +6,7 @@ services:
 language: rust
 
 env:
-  - IMAGE_NAME=rust-s2i S2I_BINARY="https://github.com/openshift/source-to-image/releases/download/v1.1.3/source-to-image-v1.1.3-ddb10f1-darwin-amd64.tar.gz"
+  - IMAGE_NAME=rust-s2i S2I_BINARY="https://github.com/openshift/source-to-image/releases/download/v1.1.3/source-to-image-v1.1.3-ddb10f1-linux-amd64.tar.gz"
 
 install:
   - mkdir -p /tmp/s2i
