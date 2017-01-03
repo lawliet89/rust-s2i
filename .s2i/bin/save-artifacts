@@ -10,4 +10,12 @@
 # tar cf - <list of files and folders>
 
 CARGO_CACHE=${CARGO_HOME:-$HOME/.cargo}
+CARGO_CACHE=`readlink -f $CARGO_CACHE`
+CARGO_PARENT=`dirname ${CARGO_CACHE}`
+CARGO_BASENAME=`basename ${CARGO_CACHE}`
 TARGET_DIR="target"
+TARGET_DIR=`readlink -f $TARGET_DIR`
+TARGET_PARENT=`dirname ${TARGET_DIR}`
+TARGET_BASENAME=`basename ${TARGET_DIR}`
+
+tar cf - -C "${CARGO_PARENT}" "${CARGO_BASENAME}" -C "${TARGET_PARENT}" "${TARGET_BASENAME}"
