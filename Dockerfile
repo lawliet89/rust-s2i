@@ -1,5 +1,3 @@
-
-# rust-s2i
 FROM openshift/base-centos7
 MAINTAINER Yong Wen Chua <me@yongwen.xyz>
 
@@ -18,9 +16,6 @@ RUN set -x \
     && /tmp/rustup.sh  --disable-sudo --yes --revision="${BUILDER_VERSION}" \
     && rm /tmp/rustup.sh \
     && yum clean all -y
-
-# TODO (optional): Copy the builder files into /opt/app-root
-# COPY ./<builder_folder>/ /opt/app-root/
 
 # Copy the S2I scripts to /usr/libexec/s2i, since openshift/base-centos7 image sets io.openshift.s2i.scripts-url label that way
 COPY ./.s2i/bin/ /usr/libexec/s2i
