@@ -3,18 +3,19 @@ sudo: required
 services:
   - docker
 
-language: go
-
-go: 1.6
+language: rust
 
 env:
-  - IMAGE_NAME=rust-s2i S2I_BINARY="https://github.com/openshift/source-to-image/releases/download/v1.1.3/source-to-image-v1.1.3-ddb10f1-darwin-amd64.tar.gz"
+  - IMAGE_NAME=rust-s2i S2I_BINARY="https://github.com/openshift/source-to-image/releases/download/v1.1.3/source-to-image-v1.1.3-ddb10f1-linux-amd64.tar.gz"
 
 install:
-  - "curl \"${S2I_BINARY}\" > s2i.tar.gz"
-  - tar -xvf s2i.tar.gz ./s2i
-  - cp s2i/s2i /usr/local/bin
-  - rm -rf s2i s2i.tar.gz
+  - mkdir -p /tmp/s2i
+  - "curl -L \"${S2I_BINARY}\" > /tmp/s2i/s2i.tar.gz"
+  - pushd /tmp/s2i
+  - tar -xvf s2i.tar.gz
+  - sudo cp s2i /usr/local/bin
+  - rm -rf *
+  - popd
 
 script:
   - docker build -t "${IMAGE_NAME}" .
