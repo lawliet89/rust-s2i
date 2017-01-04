@@ -1,3 +1,10 @@
 #!/bin/bash -e
+set -eu
+RUST_BINARY="${RUST_BINARY:-test-app}"
 
-echo "Nothing to assemble" > /dev/null
+if [ ! -x "release/${RUST_BINARY}" ]; then
+  echo "The rust binary ${RUST_BINARY} does not exist or is not executable. Did you set the RUST_BINARY variable?"
+  exit 1
+fi
+
+find release -type f -not -name "${RUST_BINARY}" -print0 | xargs -0 rm --
