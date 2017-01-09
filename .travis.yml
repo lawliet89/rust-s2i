@@ -21,6 +21,6 @@ install:
 script:
   - docker build -t "${IMAGE_NAME}" .
   - pushd runtime
-  - docker build -t "${RUNTIME_IMAGE_NAME}"
+  - docker build -t "${RUNTIME_IMAGE_NAME}" .
   - popd
   - test/run
