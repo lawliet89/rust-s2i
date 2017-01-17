@@ -91,6 +91,7 @@ cleanup() {
     if container_exists; then
       docker stop $(cat $cid_file)
     fi
+    rm ${cid_file}
   fi
   if image_exists ${IMAGE_NAME}-testapp; then
     docker rmi ${IMAGE_NAME}-testapp

@@ -7,4 +7,6 @@
 #	https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
 #
 
-cargo run --release
+RUST_BINARY="${RUST_BINARY:-test-app}"
+
+cargo run --release --bin ${RUST_BINARY}
