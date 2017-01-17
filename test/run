@@ -10,6 +10,7 @@
 # The image has to be available before this script is executed.
 #
 IMAGE_NAME=${IMAGE_NAME-rust-s2i-candidate}
+RUNTIME_IMAGE_NAME=${RUNTIME_IMAGE_NAME:-rust-s2i-runtime-candidate}
 
 # Determining system utility executables (darwin compatibility check)
 READLINK_EXEC="readlink"
@@ -59,9 +60,18 @@ run_s2i_build() {
   s2i build --incremental=true ${s2i_args} file://${test_dir}/test-app ${IMAGE_NAME} ${IMAGE_NAME}-testapp
 }
 
+run_s2i_runtime_build() {
+  s2i build --runtime-image=${RUNTIME_IMAGE_NAME} ${s2i_args} file://${test_dir}/test-app ${IMAGE_NAME} ${IMAGE_NAME}-testapp
+}
+
 prepare() {
   if ! image_exists ${IMAGE_NAME}; then
     echo "ERROR: The image ${IMAGE_NAME} must exist before this script is executed."
+    exit 1
+  fi
+
+  if ! image_exists ${RUNTIME_IMAGE_NAME}; then
+    echo "ERROR: The image ${RUNTIME_IMAGE_NAME} must exist before this script is executed."
     exit 1
   fi
   # s2i build requires the application is a valid 'Git' repository
@@ -70,7 +80,6 @@ prepare() {
   git config user.email "build@localhost" && git config user.name "builder"
   git add -A && git commit -m "Sample commit"
   popd >/dev/null
-  run_s2i_build
 }
 
 run_test_application() {
@@ -82,6 +91,7 @@ cleanup() {
     if container_exists; then
       docker stop $(cat $cid_file)
     fi
+    rm ${cid_file}
   fi
   if image_exists ${IMAGE_NAME}-testapp; then
     docker rmi ${IMAGE_NAME}-testapp
@@ -137,9 +147,23 @@ test_connection() {
   return $result
 }
 
+test_run() {
+  # Verify that the HTTP connection can be established to test application container
+  run_test_application &
+
+  # Wait for the container to write its CID file
+  wait_for_cid
+
+  test_connection
+  check_result $?
+
+  cleanup
+}
+
 # Build the application image twice to ensure the 'save-artifacts' and
 # 'restore-artifacts' scripts are working properly
 prepare
+run_s2i_build
 run_s2i_build
 check_result $?
 
@@ -147,13 +171,10 @@ check_result $?
 test_usage
 check_result $?
 
-# Verify that the HTTP connection can be established to test application container
-run_test_application &
+test_run
 
-# Wait for the container to write its CID file
-wait_for_cid
-
-test_connection
+# Test for building with runtime container
+run_s2i_runtime_build
 check_result $?
 
-cleanup
+test_run
