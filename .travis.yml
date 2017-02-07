@@ -19,8 +19,4 @@ install:
   - popd
 
 script:
-  - docker build -t "${IMAGE_NAME}" .
-  - pushd runtime
-  - docker build -t "${RUNTIME_IMAGE_NAME}" .
-  - popd
-  - test/run
+  - make test

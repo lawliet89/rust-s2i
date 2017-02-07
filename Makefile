@@ -10,4 +10,4 @@ build:
 test:
 	docker build -t $(IMAGE_NAME)-candidate .
 	docker build -t ${RUNTIME_IMAGE_NAME}-candidate runtime
-	IMAGE_NAME=$(IMAGE_NAME)-candidate test/run
+	IMAGE_NAME=$(IMAGE_NAME)-candidate RUNTIME_IMAGE_NAME=${RUNTIME_IMAGE_NAME}-candidate test/run
