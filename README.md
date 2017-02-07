@@ -3,19 +3,19 @@
 [Rust](https://www.rust-lang.org) builder image and run time image
 for [`s2i`](https://github.com/openshift/source-to-image/).
 
-The images are pushed to [Dockerhub](https://hub.docker.com/r/lawliet89/rust-s2i/)  
+The images are pushed to [Dockerhub](https://hub.docker.com/r/lawliet89/rust-s2i/)
 
 ## Dockerfiles
 
 ### Builder
- - 1.14.0, latest ([`Dockerfile`](Dockerfile))
+ - 1.15.0, latest ([`Dockerfile`](Dockerfile))
 
 ### Runtime
  - runtime ([`Dockerfile`](runtime/Dockerfile))
 
 ### Building the image
 
-For the Builder image, simply `docker build -t rust-s2i:1.14.0 .`.
+For the Builder image, simply `docker build -t rust-s2i:1.15.0 .`.
 
 To build the runtime image, you use `docker build -t rust-s2i:runtime runtime`
 
@@ -29,7 +29,7 @@ without the need for the Rust toolchain.
 ```bash
 s2i build \
   /path/to/test-app \
-  lawliet89/rust-s2i:1.14.0 \
+  lawliet89/rust-s2i:1.15.0 \
   test-app \
   --runtime-image lawliet89/rust-s2i:runtime \
   -e RUST_BINARY="my_app"

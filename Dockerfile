@@ -1,7 +1,7 @@
 FROM openshift/base-centos7
 MAINTAINER Yong Wen Chua <me@yongwen.xyz>
 
-ENV BUILDER_VERSION 1.14.0
+ENV BUILDER_VERSION 1.15.0
 
 LABEL io.k8s.description="Platform for building Rust Applications" \
      io.k8s.display-name="Rust 1.14.0" \
