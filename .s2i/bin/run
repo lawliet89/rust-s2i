@@ -9,4 +9,4 @@
 
 RUST_BINARY="${RUST_BINARY:-test-app}"
 
-cargo run --release --bin ${RUST_BINARY}
+exec target/release/"${RUST_BINARY}"
