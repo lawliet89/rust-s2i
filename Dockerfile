@@ -19,8 +19,10 @@ RUN set -x \
     && rm /tmp/rustup.sh \
     && yum clean all -y
 
-# Copy the S2I scripts to /usr/libexec/s2i, since openshift/base-centos7 image sets io.openshift.s2i.scripts-url label that way
 COPY ./.s2i/bin/ /usr/libexec/s2i
 
-EXPOSE 8080
+RUN chown -R 1001:1001 /opt/app-root
+
+# This default user is created in the openshift/base-centos7 image
+USER 1001
 CMD ["usage"]
