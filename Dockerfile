@@ -7,7 +7,7 @@ LABEL io.k8s.description="Platform for building Rust Applications" \
      io.openshift.tags="rust" \
      io.openshift.s2i.assemble-input-files="/opt/app-root/src/target/release"
 
-ENV RUST_VERSION 1.15.1
+ENV RUST_VERSION 1.16.0
 
 RUN set -x \
     && yum install -y \
