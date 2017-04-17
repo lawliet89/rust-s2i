@@ -1,5 +1,7 @@
 # rust-s2i
 
+**This is deprecated. Use [`rust-cross`](https://github.com/japaric/rust-cross) instead.**
+
 [Rust](https://www.rust-lang.org) builder image and run time image
 for [`s2i`](https://github.com/openshift/source-to-image/).
 
